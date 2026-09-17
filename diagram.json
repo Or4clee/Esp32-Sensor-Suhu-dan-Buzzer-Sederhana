@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "author": "Simulator",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -120, "left": 160, "attrs": {} },
+    { "type": "wokwi-led", "id": "led_red", "top": -80, "left": -60, "attrs": { "color": "red" } },
+    { "type": "wokwi-led", "id": "led_green", "top": -80, "left": -120, "attrs": { "color": "green" } },
+    { "type": "wokwi-resistor", "id": "r_red", "top": 0, "left": -60, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r_green", "top": 0, "left": -120, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "bz", "top": 120, "left": -100, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:3V3", "dht:VCC", "red", [ "v-20", "h150" ] ],
+    [ "esp:GND.1", "dht:GND", "black", [ "v-10", "h120" ] ],
+    [ "esp:4", "dht:SDA", "gold", [ "v-30", "h80" ] ],
+    [ "esp:18", "r_red:1", "orange", [ "h-20" ] ],
+    [ "r_red:2", "led_red:A", "orange", [ "v-20" ] ],
+    [ "led_red:C", "esp:GND.1", "black", [ "v20", "h60" ] ],
+    [ "esp:19", "r_green:1", "green", [ "h-40" ] ],
+    [ "r_green:2", "led_green:A", "green", [ "v-20" ] ],
+    [ "led_green:C", "esp:GND.1", "black", [ "v40", "h120" ] ],
+    [ "esp:23", "bz:1", "purple", [ "h-50" ] ],
+    [ "bz:2", "esp:GND.2", "black", [ "v30", "h80" ] ]
+  ]
+}
